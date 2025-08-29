@@ -5,7 +5,7 @@ const exp = (function() {
 
     var p = {};
 
-    const condition = 1;
+    const condition = Math.floor(Math.random() * 2);
 
     const play = ["play", "watch"][condition];
 
@@ -55,7 +55,7 @@ const exp = (function() {
             </div>`,
 
             `<div class='parent'>
-                <p>Eventually, the will stop with one of the values activated.</p>
+                <p>Eventually, the wheel will stop with one of the values activated.</p>
                 <p>At that point, you’ll see how many tokens you won.</p>
                 <img src="./img/roulette-stop.png" style="width:50%; height:50%">
             </div>`,
@@ -87,7 +87,7 @@ const exp = (function() {
             `<div class='parent'>
                 <p>To stop a roulette wheel, press the <strong>spacebar</strong>.</p>
                 <p>As soon as you press it, the wheel will stop on the currently activated value.</p>
-                <img src="./img/roulette-gif.gif" style="width:50%; height:50%">
+                <img src="./img/roulette-stop.png" style="width:50%; height:50%">
             </div>`,
 
             `<div class='parent'>
@@ -106,7 +106,7 @@ const exp = (function() {
             `<div class='parent'>
                 <p>The roulette wheel will stop automatically.</p>
                 <p>Simply watch as the wheel eventually stops on one of the values.</p>
-                <img src="./img/roulette-gif.gif" style="width:50%; height:50%">
+                <img src="./img/roulette-stop.png" style="width:50%; height:50%">
             </div>`,
 
             `<div class='parent'>
@@ -159,22 +159,22 @@ const exp = (function() {
             </div>`,
         questions: [
             {
-                prompt: `If you land on a 9 and there's a 100% chance of a standard outcome, what are your chances of earning 9 tokens?`, 
+                prompt: `If the wheel stops on a 9 and there's a 100% chance of a standard outcome, what are your chances of earning 9 tokens?`, 
                 name: `attnChk1`, 
                 options: ['100%', '75%', '50%', '25%'],
             },
             {
-                prompt: `If you land on a 9 and there's a 75% chance of a standard outcome, what are your chances of earning 9 tokens?`, 
+                prompt: `If the wheel stops on a 9 and there's a 75% chance of a standard outcome, what are your chances of earning 9 tokens?`, 
                 name: `attnChk2`, 
                 options: ['100%', '75%', '50%', '25%'],
             },
             {
-                prompt: `If you land on a 9 and there's a 50% chance of a standard outcome, what are your chances of earning 9 tokens?`, 
+                prompt: `If the wheel stops on a 9 and there's a 50% chance of a standard outcome, what are your chances of earning 9 tokens?`, 
                 name: `attnCh3`, 
                 options: ['100%', '75%', '50%', '25%'],
             },
             {
-                prompt: `If you land on a 9 and there's a 25% chance of a standard outcome, what are your chances of earning 9 tokens?`, 
+                prompt: `If the wheel stops on a 9 and there's a 25% chance of a standard outcome, what are your chances of earning 9 tokens?`, 
                 name: `attnCh4`, 
                 options: ['100%', '75%', '50%', '25%'],
             },
