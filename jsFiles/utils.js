@@ -423,7 +423,7 @@ const createSpinner = function(canvas, spinnerData, score, sectors, reliability,
  *   controller.start();
  */
 
-function createActivatorWheel(canvas, spinnerData, score, sectors, flip) {
+function createActivatorWheel(canvas, spinnerData, score, sectors, flip, play) {
 
   const cfg = {
     minStepMs: 50,
@@ -575,6 +575,14 @@ function createActivatorWheel(canvas, spinnerData, score, sectors, flip) {
     if (running || frozen) return;
     running = true;
     stepLoop();
+    if (!play) {
+      const autoDelay = randInt(300, 3000); // ms
+      setTimeout(() => {
+        if (running && !frozen) {
+          freezeAndScore();
+        }
+      }, autoDelay);
+    }
   }
 
   function stop() {
@@ -601,9 +609,12 @@ function createActivatorWheel(canvas, spinnerData, score, sectors, flip) {
     window.removeEventListener("resize", onResize);
   }
 
-  resize();
-  window.addEventListener("keydown", onKeyDown);
+  if (play) {
+    window.addEventListener("keydown", onKeyDown);
+  }
   window.addEventListener("resize", onResize);
+
+  resize();
   if (cfg.autoStart) start();
 
   return { start, stop, destroy: teardown, getActiveIndex: () => activeIndex };

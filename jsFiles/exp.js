@@ -27,57 +27,48 @@ const exp = (function() {
     const html = {
         welcome_play: [
             `<div class='parent'>
-                <p><strong>Welcome to Wheel of Fortune!</strong></p>
-                <p>In Wheel of Fortune, you'll spin a series of prize wheels.</p>
-                <p>With each spin, you'll earn tokens.</p>
-                <p>Your goal is to earn as many tokens as possible!</p>
+                <p><strong>Welcome to Token Roulette!</strong></p>
+                <p>In Token Roulette, you'll earn tokens by playing a series of roulette wheels.</p>
+                <p>Your goal is simple: earn as many tokens as possible!</p>
             </div>`,
         ],
 
         welcome_watch: [
             `<div class='parent'>
-                <p><strong>Welcome to Wheel of Fortune!</strong></p>
-                <p>In Wheel of Fortune, you'll observe a series of spinning prize wheels.</p>
-                <p>Each time a prize wheel spins, you'll earn tokens.</p>
-                <p>Your goal is to earn as many tokens as possible!</p>
+                <p><strong>Welcome to Token Roulette!</strong></p>
+                <p>In Token Roulette, you'll earn tokens while observing a series of roulette wheels.</p>
+                <p>Your goal is simple: earn as many tokens as possible!</p>
             </div>`,
         ],
 
         how_to_earn: [
             `<div class='parent'>
                 <p>The more tokens you earn, the better your chances of winning a <strong>$100.00 bonus prize</strong>.</p>
-                <p>The tokens you earn will be entered into a lottery, and if one of your tokens is drawn, you'll win $100.00. 
-                To maximize your chances of winning a $100.00 bonus, you'll need to earn as many tokens as possible.</p>
+                <p>All of your tokens will be entered into a lottery. If one of your tokens is drawn, you’ll win $100.00. 
+                To maximize your chances, you’ll want to earn as many tokens as possible.</p>
             </div>`,
 
             `<div class='parent'>
-                <p>Each wheel is divided into four wedges, like this:</p>
-                <img src="./img/arrow-up.png" style="width:50%; height:50%">
+                <p>Each wheel is divided into four wedges.</p>
+                <p>The values on the wedges will rapidly activate at random, like this:</p>
+                <img src="./img/roulette-gif.gif" style="width:50%; height:50%">
             </div>`,
 
             `<div class='parent'>
-                <p>When a wheel stops spinning, one of the wedges will activate.</p>
-                <p>The activated wedge will turn black, like this:</p>
+                <p>Eventually, the will stop with one of the values activated.</p>
+                <p>At that point, you’ll see how many tokens you won.</p>
+                <img src="./img/roulette-stop.png" style="width:50%; height:50%">
+            </div>`,
+
+            `<div class='parent'>
+                <p>Usually, the number of tokens you win equals the activated number. For example, if the 4 is activated, you’ll usually win 4 tokens.</p>
+                <p>This is called a <strong>standard outcome</strong>.</p>
                 <img src="./img/standard-outcome.png" style="width:50%; height:50%">
             </div>`,
 
             `<div class='parent'>
-                <p>The number on the activated wedge is added to your total score.</p>
-                <p>In this example, you'd gain 11 tokens.</p>
-                <img src="./img/standard-outcome.png" style="width:50%; height:50%">
-            </div>`,
-
-            `<div class='parent'>
-                <p>Typically, the wedge that lands on the arrow will activate.</p>
-                <p>This is called a "standard outcome."</p>
-                <p>Below is an example of a standard outcome.</p>
-                <img src="./img/standard-outcome.png" style="width:50%; height:50%">
-            </div>`,
-
-            `<div class='parent'>
-                <p>Occasionally, a random wedge will activate instead.</p>
-                <p>This is called a "random outcome."</p>
-                <p>Here's an example of a random outcome:</p>
+                <p>Occasionally, the number of tokens you win equals one of the three <em>unactivated numbers</em>. For example, if the 4 is activated, you might instead win 2 tokens.</p>
+                <p>This is called a <strong>random outcome</strong>.</p>
                 <img src="./img/random-outcome.png" style="width:50%; height:50%">
             </div>`,
 
@@ -86,77 +77,53 @@ const exp = (function() {
             </div>`,
 
             `<div class='parent'>
-                <p>The chance of a standard outcome is displayed before each wheel.</p>
+                <p>The chance of a standard outcome will be displayed before each wheel.</p>
                 <p>For example, this message means that the next wheel has a 75% chance of a standard outcome and a 25% chance of a random outcome.</p>
                 <img src="./img/outcome-75.png" style="width:70%; height:70%">      
             </div>`,
-
-            `<div class='parent'>
-                <p>After each spin, the arrow at the center of the wheel will change directions.</p>
-            </div>`,
-
-            `<div class='parent'>
-                <p>Sometimes the arrow will point up:</p>
-                <img src="./img/arrow-up.png" style="width:50%; height:50%">      
-            </div>`,
-
-            `<div class='parent'>
-                <p>Sometimes the arrow will point right:</p>
-                <img src="./img/arrow-right.png" style="width:50%; height:50%">      
-            </div>`,
-
-            `<div class='parent'>
-                <p>Sometimes the arrow will point left:</p>
-                <img src="./img/arrow-left.png" style="width:50%; height:50%">      
-            </div>`,
-
-            `<div class='parent'>
-                <p>Sometimes the arrow will point down:</p>
-                <img src="./img/arrow-down.png" style="width:50%; height:50%">      
-            </div>`
         ],
 
         how_to_spin_play: [
             `<div class='parent'>
-                <p>To spin a prize wheel, just grab it with your cursor and give it a spin!
-                <br>Watch the animation below to see how it's done.</p>
-                <img src="./img/spin-${play}-gif.gif" style="width:60%; height:60%">
+                <p>To stop a roulette wheel, press the <strong>spacebar</strong>.</p>
+                <p>As soon as you press it, the wheel will stop on the currently activated value.</p>
+                <img src="./img/roulette-gif.gif" style="width:50%; height:50%">
             </div>`,
 
             `<div class='parent'>
-                <p>Throughout Wheel of Fortune, you'll answer questions about your feelings.</p>
-                <p>Specifically, you'll report how <strong>immersed and engaged</strong> you feel while spinning each wheel,
+                <p>Throughout Token Roulette, you’ll also answer questions about your feelings.</p>
+                <p>Specifically, you’ll report how <strong>immersed and engaged</strong> you feel while playing each wheel,
                 as well as how <strong>happy</strong> you currently feel.</p>
             </div>`,      
 
             `<div class='parent'>
-                <p>You're ready to start playing Wheel of Fortune!</p>
+                <p>You’re ready to start playing Token Roulette!</p>
                 <p>Continue to the next screen to begin.</p>
-            </div>`,      
+            </div>`,          
         ],
 
         how_to_spin_watch: [
             `<div class='parent'>
-                <p>Each prize wheel spins automatically.
-                <br>Watch the animation below to see an example.</p>
-                <img src="./img/spin-${play}-gif.gif" style="width:60%; height:60%">
+                <p>The roulette wheel will stop automatically.</p>
+                <p>Simply watch as the wheel eventually stops on one of the values.</p>
+                <img src="./img/roulette-gif.gif" style="width:50%; height:50%">
             </div>`,
 
             `<div class='parent'>
-                <p>Throughout Wheel of Fortune, you'll answer questions about your feelings.</p>
-                <p>Specifically, you'll report how <strong>immersed and engaged</strong> you feel during each round of Wheel of Fortune,
+                <p>Throughout Token Roulette, you’ll also answer questions about your feelings.</p>
+                <p>Specifically, you’ll report how <strong>immersed and engaged</strong> you feel while observing each wheel,
                 as well as how <strong>happy</strong> you currently feel.</p>
             </div>`,      
 
             `<div class='parent'>
-                <p>You're ready to start playing Wheel of Fortune!</p>
+                <p>You’re ready to start Token Roulette!</p>
                 <p>Continue to the next screen to begin.</p>
-            </div>`,      
+            </div>`,  
         ],
 
         postTask: [
             `<div class='parent'>
-                <p>Wheel of Fortune is now complete!</p>
+                <p><strong>Token Roulette is now complete!</strong></p>
                 <p>To finish this study, please continue to answer a few final questions.</p>
             </div>`
         ],
@@ -337,7 +304,7 @@ const exp = (function() {
         type: jsPsychCanvasButtonResponse,
         stimulus: function(c, spinnerData) {
             let flip = flipArray.pop()
-            createActivatorWheel(c, spinnerData, scoreTracker, jsPsych.timelineVariable('sectors'), flip);
+            createActivatorWheel(c, spinnerData, scoreTracker, jsPsych.timelineVariable('sectors'), flip, playBool);
         },
         canvas_size: [500, 500],
         score: function() {
@@ -380,7 +347,7 @@ const exp = (function() {
     const flowMeasure = {
         type: jsPsychSurveyLikert,
         questions: [
-            {prompt: `During the last round of Wheel of Fortune,<br>how <b>immersed</b> and <b>engaged</b> did you feel in what you were ${doingOrWatching}?`,
+            {prompt: `During the last round of Token Roulette,<br>how <b>immersed</b> and <b>engaged</b> did you feel in what you were ${doingOrWatching}?`,
             name: `flow`,
             labels: ['0<br>A little', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10<br>Extremely']},
         ],
@@ -425,6 +392,7 @@ const exp = (function() {
         repetitions: 1,
         timeline_variables: wheels,
         randomize_order: true,
+        sample: { type: 'without-replacement', size: 9 }
     };
 
    /*
@@ -504,7 +472,7 @@ const exp = (function() {
     p.save_data = {
         type: jsPsychPipe,
         action: "save",
-        experiment_id: "9paGFcUANmDw",
+        experiment_id: "z0YhvnAm0fma",
         filename: filename,
         data_string: ()=>jsPsych.data.get().csv()
     };
@@ -513,6 +481,6 @@ const exp = (function() {
 
 }());
 
-const timeline = [exp.task, exp.consent, exp.instLoop, exp.postIntro, exp.task, exp.demographics, exp.save_data];
+const timeline = [exp.consent, exp.instLoop, exp.postIntro, exp.task, exp.demographics, exp.save_data];
 
 jsPsych.run(timeline);
