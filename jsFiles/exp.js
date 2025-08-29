@@ -305,9 +305,7 @@ const exp = (function() {
             createActivatorWheel(c, spinnerData, jsPsych.timelineVariable('sectors'), flip, playBool);
         },
         canvas_size: [500, 500],
-        score: function() {
-            return scoreTracker
-        },
+        score: null,
         data: {wheel_id: jsPsych.timelineVariable('wheel_id'), ev: jsPsych.timelineVariable('ev'), hE: jsPsych.timelineVariable('hE'), n_flip: jsPsych.timelineVariable('n_flip'), mi: jsPsych.timelineVariable('mi')},
         on_finish: function(data) {
             data.round = round;
