@@ -149,7 +149,7 @@ var jsPsychCanvasButtonResponse = (function (jspsych) {
           const waitForEnd = setInterval(function() {
             if(spinnerData.award_score) {
               clearInterval(waitForEnd);
-              setTimeout(after_response, 2000);
+              setTimeout(after_response, 1750);
             }
           }, 100);
           // hide image if timing is set

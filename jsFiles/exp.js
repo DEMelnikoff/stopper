@@ -284,24 +284,28 @@ const exp = (function() {
         {sectors: [ wedges.two, wedges.three, wedges.four, wedges.five ],   wheel_id: 1,  n_flip: 0, label: "100%", ev: 3.5, cardinality: 4, mi: 2},
         {sectors: [ wedges.four, wedges.five, wedges.six, wedges.seven ],   wheel_id: 2,  n_flip: 0, label: "100%", ev: 5.5, cardinality: 4, mi: 2},
         {sectors: [ wedges.six, wedges.seven, wedges.eight, wedges.nine ],  wheel_id: 3,  n_flip: 0, label: "100%", ev: 7.5, cardinality: 4, mi: 2},
-        {sectors: [ wedges.two, wedges.five, wedges.two, wedges.five ],     wheel_id: 4,  n_flip: 0, label: "100%", ev: 3.5, cardinality: 2, mi: 2},
-        {sectors: [ wedges.four, wedges.seven, wedges.four, wedges.seven ], wheel_id: 5,  n_flip: 0, label: "100%", ev: 5.5, cardinality: 2, mi: 2},
-        {sectors: [ wedges.six, wedges.nine, wedges.six, wedges.nine ],     wheel_id: 6,  n_flip: 0, label: "100%", ev: 7.5, cardinality: 2, mi: 2},
+        {sectors: [ wedges.two, wedges.two, wedges.two, wedges.five ],     wheel_id: 4,  n_flip: 0, label: "100%", ev: 3.5, cardinality: 2, mi: 2},
+        {sectors: [ wedges.four, wedges.four, wedges.four, wedges.seven ], wheel_id: 5,  n_flip: 0, label: "100%", ev: 5.5, cardinality: 2, mi: 2},
+        {sectors: [ wedges.six, wedges.six, wedges.six, wedges.nine ],     wheel_id: 6,  n_flip: 0, label: "100%", ev: 7.5, cardinality: 2, mi: 2},
 
         {sectors: [ wedges.two, wedges.three, wedges.four, wedges.five ],   wheel_id: 7,  n_flip: 2, label: "80%", ev: 3.5, cardinality: 4, mi: 2},
         {sectors: [ wedges.four, wedges.five, wedges.six, wedges.seven ],   wheel_id: 8,  n_flip: 2, label: "80%", ev: 5.5, cardinality: 4, mi: 2},
         {sectors: [ wedges.six, wedges.seven, wedges.eight, wedges.nine ],  wheel_id: 9,  n_flip: 2, label: "80%", ev: 7.5, cardinality: 4, mi: 2},
-        {sectors: [ wedges.two, wedges.five, wedges.two, wedges.five ],     wheel_id: 10, n_flip: 2, label: "80%", ev: 3.5, cardinality: 2, mi: 2},
-        {sectors: [ wedges.four, wedges.seven, wedges.four, wedges.seven ], wheel_id: 11, n_flip: 2, label: "80%", ev: 5.5, cardinality: 2, mi: 2},
-        {sectors: [ wedges.six, wedges.nine, wedges.six, wedges.nine ],     wheel_id: 12, n_flip: 2, label: "80%", ev: 7.5, cardinality: 2, mi: 2},
+        {sectors: [ wedges.two, wedges.two, wedges.two, wedges.five ],     wheel_id: 10, n_flip: 2, label: "80%", ev: 3.5, cardinality: 2, mi: 2},
+        {sectors: [ wedges.four, wedges.four, wedges.four, wedges.seven ], wheel_id: 11, n_flip: 2, label: "80%", ev: 5.5, cardinality: 2, mi: 2},
+        {sectors: [ wedges.six, wedges.six, wedges.six, wedges.nine ],     wheel_id: 12, n_flip: 2, label: "80%", ev: 7.5, cardinality: 2, mi: 2},
 
         {sectors: [ wedges.two, wedges.three, wedges.four, wedges.five ],   wheel_id: 13, n_flip: 4, label: "60%", ev: 3.5, cardinality: 4, mi: 2},
         {sectors: [ wedges.four, wedges.five, wedges.six, wedges.seven ],   wheel_id: 14, n_flip: 4, label: "60%", ev: 5.5, cardinality: 4, mi: 2},
         {sectors: [ wedges.six, wedges.seven, wedges.eight, wedges.nine ],  wheel_id: 15, n_flip: 4, label: "60%", ev: 7.5, cardinality: 4, mi: 2},
-        {sectors: [ wedges.two, wedges.five, wedges.two, wedges.five ],     wheel_id: 16, n_flip: 4, label: "60%", ev: 3.5, cardinality: 2, mi: 2},
-        {sectors: [ wedges.four, wedges.seven, wedges.four, wedges.seven ], wheel_id: 17, n_flip: 4, label: "60%", ev: 5.5, cardinality: 2, mi: 2},
-        {sectors: [ wedges.six, wedges.nine, wedges.six, wedges.nine ],     wheel_id: 18, n_flip: 4, label: "60%", ev: 7.5, cardinality: 2, mi: 2},
+        {sectors: [ wedges.two, wedges.two, wedges.two, wedges.five ],     wheel_id: 16, n_flip: 4, label: "60%", ev: 3.5, cardinality: 2, mi: 2},
+        {sectors: [ wedges.four, wedges.four, wedges.four, wedges.seven ], wheel_id: 17, n_flip: 4, label: "60%", ev: 5.5, cardinality: 2, mi: 2},
+        {sectors: [ wedges.six, wedges.six, wedges.six, wedges.nine ],     wheel_id: 18, n_flip: 4, label: "60%", ev: 7.5, cardinality: 2, mi: 2},
     ];
+
+    wheels.forEach(wheel => {
+        wheel.sectors = jsPsych.randomization.repeat(wheel.sectors.slice(), 1);
+    });
 
     let scoreTracker = 0; // track current score
 
@@ -353,11 +357,12 @@ const exp = (function() {
             const pts = last.award_score;     // <-- awarded (reliability-adjusted)
             const col = last.award_color;      // <-- matching color
             return `
-              <div class="center">
-                <div style="font-size:80px; font-weight:800; line-height:80px; color:${col}">
-                  +${pts}<br>Tokens
+                <div class="center">
+                    <div style="color:${col}; line-height:1.2">
+                        <div style="font-size:150px; font-weight:800;">+${pts}</div>
+                        <div style="font-size:80px; font-weight:600;">Tokens</div>
+                    </div>
                 </div>
-              </div>
             `;
         },
         choices: "NO_KEYS",
