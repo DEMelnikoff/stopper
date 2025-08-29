@@ -423,7 +423,7 @@ const createSpinner = function(canvas, spinnerData, score, sectors, reliability,
  *   controller.start();
  */
 
-function createActivatorWheel(canvas, spinnerData, score, sectors, flip, play) {
+function createActivatorWheel(canvas, spinnerData, sectors, flip, play) {
 
   const cfg = {
     minStepMs: 50,
@@ -560,8 +560,6 @@ function createActivatorWheel(canvas, spinnerData, score, sectors, flip, play) {
     spinnerData.landed_color = landedColor;
     spinnerData.award_score = awardPoints;
     spinnerData.award_color = awardColor;
-
-    spinnerData.score = (spinnerData.score || 0) + awardPoints;
 
     // Keep the active wedge visible (black) during the freeze
     draw(activeIndex);

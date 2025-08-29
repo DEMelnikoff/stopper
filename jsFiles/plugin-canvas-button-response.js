@@ -99,7 +99,6 @@ var jsPsychCanvasButtonResponse = (function (jspsych) {
             landed_color: null,
             award_score: null,
             award_color: null,
-            score: 0,
             rt: null,
           };
           trial.stimulus(c, spinnerData);
@@ -117,7 +116,6 @@ var jsPsychCanvasButtonResponse = (function (jspsych) {
                   landed_color: spinnerData.landed_color,
                   award_score: spinnerData.award_score,
                   award_color: spinnerData.award_color,
-                  score: spinnerData.score,
                   rt: spinnerData.rt,
               };
               // clear the display

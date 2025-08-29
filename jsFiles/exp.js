@@ -248,33 +248,31 @@ const exp = (function() {
 
     // define each wheel
     const wheels = [
-        {sectors: [ wedges.two, wedges.three, wedges.four, wedges.five ],   wheel_id: 1,  n_flip: 0, label: "100%", ev: 3.5, cardinality: 4, mi: 2},
-        {sectors: [ wedges.four, wedges.five, wedges.six, wedges.seven ],   wheel_id: 2,  n_flip: 0, label: "100%", ev: 5.5, cardinality: 4, mi: 2},
-        {sectors: [ wedges.six, wedges.seven, wedges.eight, wedges.nine ],  wheel_id: 3,  n_flip: 0, label: "100%", ev: 7.5, cardinality: 4, mi: 2},
-        {sectors: [ wedges.two, wedges.two, wedges.two, wedges.five ],     wheel_id: 4,  n_flip: 0, label: "100%", ev: 3.5, cardinality: 2, mi: 2},
-        {sectors: [ wedges.four, wedges.four, wedges.four, wedges.seven ], wheel_id: 5,  n_flip: 0, label: "100%", ev: 5.5, cardinality: 2, mi: 2},
-        {sectors: [ wedges.six, wedges.six, wedges.six, wedges.nine ],     wheel_id: 6,  n_flip: 0, label: "100%", ev: 7.5, cardinality: 2, mi: 2},
+        {sectors: [ wedges.two, wedges.three, wedges.four, wedges.five ],    wheel_id: 1,  n_flip: 0, label: "100%", ev: 3.5, cardinality: 4, mi: 2},
+        {sectors: [ wedges.four, wedges.five, wedges.six, wedges.seven ],    wheel_id: 2,  n_flip: 0, label: "100%", ev: 5.5, cardinality: 4, mi: 2},
+        {sectors: [ wedges.six, wedges.seven, wedges.eight, wedges.nine ],   wheel_id: 3,  n_flip: 0, label: "100%", ev: 7.5, cardinality: 4, mi: 2},
+        {sectors: [ wedges.three, wedges.three, wedges.three, wedges.five ], wheel_id: 4,  n_flip: 0, label: "100%", ev: 3.5, cardinality: 2, mi: 2},
+        {sectors: [ wedges.five, wedges.five, wedges.five, wedges.seven ],   wheel_id: 5,  n_flip: 0, label: "100%", ev: 5.5, cardinality: 2, mi: 2},
+        {sectors: [ wedges.seven, wedges.seven, wedges.seven, wedges.nine ], wheel_id: 6,  n_flip: 0, label: "100%", ev: 7.5, cardinality: 2, mi: 2},
 
-        {sectors: [ wedges.two, wedges.three, wedges.four, wedges.five ],   wheel_id: 7,  n_flip: 2, label: "80%", ev: 3.5, cardinality: 4, mi: 2},
-        {sectors: [ wedges.four, wedges.five, wedges.six, wedges.seven ],   wheel_id: 8,  n_flip: 2, label: "80%", ev: 5.5, cardinality: 4, mi: 2},
-        {sectors: [ wedges.six, wedges.seven, wedges.eight, wedges.nine ],  wheel_id: 9,  n_flip: 2, label: "80%", ev: 7.5, cardinality: 4, mi: 2},
-        {sectors: [ wedges.two, wedges.two, wedges.two, wedges.five ],     wheel_id: 10, n_flip: 2, label: "80%", ev: 3.5, cardinality: 2, mi: 2},
-        {sectors: [ wedges.four, wedges.four, wedges.four, wedges.seven ], wheel_id: 11, n_flip: 2, label: "80%", ev: 5.5, cardinality: 2, mi: 2},
-        {sectors: [ wedges.six, wedges.six, wedges.six, wedges.nine ],     wheel_id: 12, n_flip: 2, label: "80%", ev: 7.5, cardinality: 2, mi: 2},
+        {sectors: [ wedges.two, wedges.three, wedges.four, wedges.five ],    wheel_id: 7,  n_flip: 2, label: "80%", ev: 3.5, cardinality: 4, mi: 2},
+        {sectors: [ wedges.four, wedges.five, wedges.six, wedges.seven ],    wheel_id: 8,  n_flip: 2, label: "80%", ev: 5.5, cardinality: 4, mi: 2},
+        {sectors: [ wedges.six, wedges.seven, wedges.eight, wedges.nine ],   wheel_id: 9,  n_flip: 2, label: "80%", ev: 7.5, cardinality: 4, mi: 2},
+        {sectors: [ wedges.three, wedges.three, wedges.three, wedges.five ], wheel_id: 10, n_flip: 2, label: "80%", ev: 3.5, cardinality: 2, mi: 2},
+        {sectors: [ wedges.five, wedges.five, wedges.five, wedges.seven ],   wheel_id: 11, n_flip: 2, label: "80%", ev: 5.5, cardinality: 2, mi: 2},
+        {sectors: [ wedges.seven, wedges.seven, wedges.seven, wedges.nine ], wheel_id: 12, n_flip: 2, label: "80%", ev: 7.5, cardinality: 2, mi: 2},
 
-        {sectors: [ wedges.two, wedges.three, wedges.four, wedges.five ],   wheel_id: 13, n_flip: 4, label: "60%", ev: 3.5, cardinality: 4, mi: 2},
-        {sectors: [ wedges.four, wedges.five, wedges.six, wedges.seven ],   wheel_id: 14, n_flip: 4, label: "60%", ev: 5.5, cardinality: 4, mi: 2},
-        {sectors: [ wedges.six, wedges.seven, wedges.eight, wedges.nine ],  wheel_id: 15, n_flip: 4, label: "60%", ev: 7.5, cardinality: 4, mi: 2},
-        {sectors: [ wedges.two, wedges.two, wedges.two, wedges.five ],     wheel_id: 16, n_flip: 4, label: "60%", ev: 3.5, cardinality: 2, mi: 2},
-        {sectors: [ wedges.four, wedges.four, wedges.four, wedges.seven ], wheel_id: 17, n_flip: 4, label: "60%", ev: 5.5, cardinality: 2, mi: 2},
-        {sectors: [ wedges.six, wedges.six, wedges.six, wedges.nine ],     wheel_id: 18, n_flip: 4, label: "60%", ev: 7.5, cardinality: 2, mi: 2},
+        {sectors: [ wedges.two, wedges.three, wedges.four, wedges.five ],    wheel_id: 13, n_flip: 4, label: "60%", ev: 3.5, cardinality: 4, mi: 2},
+        {sectors: [ wedges.four, wedges.five, wedges.six, wedges.seven ],    wheel_id: 14, n_flip: 4, label: "60%", ev: 5.5, cardinality: 4, mi: 2},
+        {sectors: [ wedges.six, wedges.seven, wedges.eight, wedges.nine ],   wheel_id: 15, n_flip: 4, label: "60%", ev: 7.5, cardinality: 4, mi: 2},
+        {sectors: [ wedges.three, wedges.three, wedges.three, wedges.five ], wheel_id: 16, n_flip: 4, label: "60%", ev: 3.5, cardinality: 2, mi: 2},
+        {sectors: [ wedges.five, wedges.five, wedges.five, wedges.seven ],   wheel_id: 17, n_flip: 4, label: "60%", ev: 5.5, cardinality: 2, mi: 2},
+        {sectors: [ wedges.seven, wedges.seven, wedges.seven, wedges.nine ], wheel_id: 18, n_flip: 4, label: "60%", ev: 7.5, cardinality: 2, mi: 2},
     ];
 
     wheels.forEach(wheel => {
         wheel.sectors = jsPsych.randomization.repeat(wheel.sectors.slice(), 1);
     });
-
-    let scoreTracker = 0; // track current score
 
     let round = 1;  // track current round
 
@@ -304,7 +302,7 @@ const exp = (function() {
         type: jsPsychCanvasButtonResponse,
         stimulus: function(c, spinnerData) {
             let flip = flipArray.pop()
-            createActivatorWheel(c, spinnerData, scoreTracker, jsPsych.timelineVariable('sectors'), flip, playBool);
+            createActivatorWheel(c, spinnerData, jsPsych.timelineVariable('sectors'), flip, playBool);
         },
         canvas_size: [500, 500],
         score: function() {
@@ -313,7 +311,6 @@ const exp = (function() {
         data: {wheel_id: jsPsych.timelineVariable('wheel_id'), ev: jsPsych.timelineVariable('ev'), cardinality: jsPsych.timelineVariable('cardinality'), n_flip: jsPsych.timelineVariable('n_flip'), mi: jsPsych.timelineVariable('mi')},
         on_finish: function(data) {
             data.round = round;
-            scoreTracker = data.score
         }
     };
 
@@ -335,6 +332,9 @@ const exp = (function() {
         choices: "NO_KEYS",
         trial_duration: 1750,
         data: {wheel_id: jsPsych.timelineVariable('wheel_id'), ev: jsPsych.timelineVariable('ev'), cardinality: jsPsych.timelineVariable('cardinality'), n_flip: jsPsych.timelineVariable('n_flip'), mi: jsPsych.timelineVariable('mi')},
+        on_finish: function(data) {
+            data.round = round;
+        }
     };
 
     // Choice loop
@@ -356,10 +356,6 @@ const exp = (function() {
         data: {wheel_id: jsPsych.timelineVariable('wheel_id'), ev: jsPsych.timelineVariable('ev'), cardinality: jsPsych.timelineVariable('cardinality'), n_flip: jsPsych.timelineVariable('n_flip'), mi: jsPsych.timelineVariable('mi')},
         on_finish: function(data) {
             data.round = round;
-            let scoreArray = jsPsych.data.get().select('score').values;
-            let outcomesArray = jsPsych.data.get().select('outcomes').values;
-            data.score = scoreArray[scoreArray.length - 1];
-            data.outcomes = outcomesArray[outcomesArray.length - 1];
             saveSurveyData(data);
         }
     };
@@ -377,10 +373,6 @@ const exp = (function() {
         data: {wheel_id: jsPsych.timelineVariable('wheel_id'), ev: jsPsych.timelineVariable('ev'), cardinality: jsPsych.timelineVariable('cardinality'), n_flip: jsPsych.timelineVariable('n_flip'), mi: jsPsych.timelineVariable('mi')},
         on_finish: (data) => {
             data.round = round;
-            let scoreArray = jsPsych.data.get().select('score').values;
-            let outcomesArray = jsPsych.data.get().select('outcomes').values;
-            data.score = scoreArray[scoreArray.length - 2];
-            data.outcomes = outcomesArray[outcomesArray.length - 2];
             saveSurveyData(data);
             round++;
         },
