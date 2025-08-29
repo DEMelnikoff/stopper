@@ -244,30 +244,33 @@ const exp = (function() {
         Object.keys(wedgesObj).forEach((key, i) => { wedgesObj[key].color = shuffledColors[i] });
     };
 
-    shuffleColorsInPlace(wedges);
 
     // define each wheel
     const wheels = [
         {sectors: [ wedges.two, wedges.three, wedges.four, wedges.five ],    wheel_id: 1,  n_flip: 0, label: "100%", ev: 3.5, hE: 2, mi: 2},
         {sectors: [ wedges.four, wedges.five, wedges.six, wedges.seven ],    wheel_id: 2,  n_flip: 0, label: "100%", ev: 5.5, hE: 2, mi: 2},
         {sectors: [ wedges.six, wedges.seven, wedges.eight, wedges.nine ],   wheel_id: 3,  n_flip: 0, label: "100%", ev: 7.5, hE: 2, mi: 2},
-        {sectors: [ wedges.three, wedges.three, wedges.three, wedges.five ], wheel_id: 4,  n_flip: 0, label: "100%", ev: 3.5, hE: 0.8112781, mi: 0.8112781},
-        {sectors: [ wedges.five, wedges.five, wedges.five, wedges.seven ],   wheel_id: 5,  n_flip: 0, label: "100%", ev: 5.5, hE: 0.8112781, mi: 0.8112781},
-        {sectors: [ wedges.seven, wedges.seven, wedges.seven, wedges.nine ], wheel_id: 6,  n_flip: 0, label: "100%", ev: 7.5, hE: 0.8112781, mi: 0.8112781},
+        //{sectors: [ wedges.three, wedges.three, wedges.three, wedges.five ], wheel_id: 4,  n_flip: 0, label: "100%", ev: 3.5, hE: 0.8112781, mi: 0.8112781},
+        //{sectors: [ wedges.five, wedges.five, wedges.five, wedges.seven ],   wheel_id: 5,  n_flip: 0, label: "100%", ev: 5.5, hE: 0.8112781, mi: 0.8112781},
+        //{sectors: [ wedges.seven, wedges.seven, wedges.seven, wedges.nine ], wheel_id: 6,  n_flip: 0, label: "100%", ev: 7.5, hE: 0.8112781, mi: 0.8112781},
 
-        {sectors: [ wedges.two, wedges.three, wedges.four, wedges.five ],    wheel_id: 7,  n_flip: 2, label: "80%", ev: 3.5, hE: 2, mi: 0.9610794},
-        {sectors: [ wedges.four, wedges.five, wedges.six, wedges.seven ],    wheel_id: 8,  n_flip: 2, label: "80%", ev: 5.5, hE: 2, mi: 0.9610794},
-        {sectors: [ wedges.six, wedges.seven, wedges.eight, wedges.nine ],   wheel_id: 9,  n_flip: 2, label: "80%", ev: 7.5, hE: 2, mi: 0.9610794},
-        {sectors: [ wedges.three, wedges.three, wedges.three, wedges.five ], wheel_id: 10, n_flip: 2, label: "80%", ev: 3.5, hE: 0.8112781, mi: 0.3657766},
-        {sectors: [ wedges.five, wedges.five, wedges.five, wedges.seven ],   wheel_id: 11, n_flip: 2, label: "80%", ev: 5.5, hE: 0.8112781, mi: 0.3657766},
-        {sectors: [ wedges.seven, wedges.seven, wedges.seven, wedges.nine ], wheel_id: 12, n_flip: 2, label: "80%", ev: 7.5, hE: 0.8112781, mi: 0.3657766},
+        {sectors: [ wedges.two, wedges.three, wedges.four, wedges.five ],    wheel_id: 4,  n_flip: 2, label: "80%", ev: 3.5, hE: 2, mi: 0.9610794},
+        {sectors: [ wedges.four, wedges.five, wedges.six, wedges.seven ],    wheel_id: 5,  n_flip: 2, label: "80%", ev: 5.5, hE: 2, mi: 0.9610794},
+        {sectors: [ wedges.six, wedges.seven, wedges.eight, wedges.nine ],   wheel_id: 6,  n_flip: 2, label: "80%", ev: 7.5, hE: 2, mi: 0.9610794},
+        //{sectors: [ wedges.three, wedges.three, wedges.three, wedges.five ], wheel_id: 10, n_flip: 2, label: "80%", ev: 3.5, hE: 0.8112781, mi: 0.3657766},
+        //{sectors: [ wedges.five, wedges.five, wedges.five, wedges.seven ],   wheel_id: 11, n_flip: 2, label: "80%", ev: 5.5, hE: 0.8112781, mi: 0.3657766},
+        //{sectors: [ wedges.seven, wedges.seven, wedges.seven, wedges.nine ], wheel_id: 12, n_flip: 2, label: "80%", ev: 7.5, hE: 0.8112781, mi: 0.3657766},
 
-        {sectors: [ wedges.two, wedges.three, wedges.four, wedges.five ],    wheel_id: 13, n_flip: 4, label: "60%", ev: 3.5, hE: 2, mi: 0.3950644},
-        {sectors: [ wedges.four, wedges.five, wedges.six, wedges.seven ],    wheel_id: 14, n_flip: 4, label: "60%", ev: 5.5, hE: 2, mi: 0.3950644},
-        {sectors: [ wedges.six, wedges.seven, wedges.eight, wedges.nine ],   wheel_id: 15, n_flip: 4, label: "60%", ev: 7.5, hE: 2, mi: 0.3950644},
-        {sectors: [ wedges.three, wedges.three, wedges.three, wedges.five ], wheel_id: 16, n_flip: 4, label: "60%", ev: 3.5, hE: 0.8112781, mi: 0.1436583},
-        {sectors: [ wedges.five, wedges.five, wedges.five, wedges.seven ],   wheel_id: 17, n_flip: 4, label: "60%", ev: 5.5, hE: 0.8112781, mi: 0.1436583},
-        {sectors: [ wedges.seven, wedges.seven, wedges.seven, wedges.nine ], wheel_id: 18, n_flip: 4, label: "60%", ev: 7.5, hE: 0.8112781, mi: 0.1436583},
+        {sectors: [ wedges.two, wedges.three, wedges.four, wedges.five ],    wheel_id: 7, n_flip: 4, label: "60%", ev: 3.5, hE: 2, mi: 0.3950644},
+        {sectors: [ wedges.four, wedges.five, wedges.six, wedges.seven ],    wheel_id: 8, n_flip: 4, label: "60%", ev: 5.5, hE: 2, mi: 0.3950644},
+        {sectors: [ wedges.six, wedges.seven, wedges.eight, wedges.nine ],   wheel_id: 9, n_flip: 4, label: "60%", ev: 7.5, hE: 2, mi: 0.3950644},
+        //{sectors: [ wedges.three, wedges.three, wedges.three, wedges.five ], wheel_id: 16, n_flip: 4, label: "60%", ev: 3.5, hE: 0.8112781, mi: 0.1436583},
+        //{sectors: [ wedges.five, wedges.five, wedges.five, wedges.seven ],   wheel_id: 17, n_flip: 4, label: "60%", ev: 5.5, hE: 0.8112781, mi: 0.1436583},
+        //{sectors: [ wedges.seven, wedges.seven, wedges.seven, wedges.nine ], wheel_id: 18, n_flip: 4, label: "60%", ev: 7.5, hE: 0.8112781, mi: 0.1436583},
+
+        {sectors: [ wedges.two, wedges.three, wedges.four, wedges.five ],    wheel_id: 10, n_flip: 6, label: "40%", ev: 3.5, hE: 2, mi: 0.07807191},
+        {sectors: [ wedges.four, wedges.five, wedges.six, wedges.seven ],    wheel_id: 11, n_flip: 6, label: "40%", ev: 5.5, hE: 2, mi: 0.07807191},
+        {sectors: [ wedges.six, wedges.seven, wedges.eight, wedges.nine ],   wheel_id: 12, n_flip: 6, label: "40%", ev: 7.5, hE: 2, mi: 0.07807191},
     ];
 
     wheels.forEach(wheel => {
@@ -294,6 +297,7 @@ const exp = (function() {
         data: {wheel_id: jsPsych.timelineVariable('wheel_id'), ev: jsPsych.timelineVariable('ev'), hE: jsPsych.timelineVariable('hE'), n_flip: jsPsych.timelineVariable('n_flip'), mi: jsPsych.timelineVariable('mi')},
         on_finish: function(data) {
             data.round = round;
+            shuffleColorsInPlace(wedges);
             flipArray = makeFlipArray(jsPsych.timelineVariable('n_flip'), 10);
         }
     };
@@ -382,7 +386,6 @@ const exp = (function() {
         repetitions: 1,
         timeline_variables: wheels,
         randomize_order: true,
-        sample: { type: 'without-replacement', size: 9 }
     };
 
    /*
@@ -462,7 +465,7 @@ const exp = (function() {
     p.save_data = {
         type: jsPsychPipe,
         action: "save",
-        experiment_id: "z0YhvnAm0fma",
+        experiment_id: "dy1nuOITjhzN",
         filename: filename,
         data_string: ()=>jsPsych.data.get().csv()
     };
