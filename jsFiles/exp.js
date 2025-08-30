@@ -273,13 +273,17 @@ const exp = (function() {
         {sectors: [ 'six', 'seven', 'eight', 'nine' ],   wheel_id: 12, n_flip: 6, label: "40%", ev: 7.5, hE: 2, mi: 0.07807191},
     ];
 
+    /*
     wheels.forEach(wheel => {
         wheel.sectors = jsPsych.randomization.repeat(wheel.sectors.slice(), 1);
     });
+    */
 
     let round = 1;  // track current round
 
     let flipArray;
+
+    shuffleColorsInPlace(wedges);
 
     const preSpin = {
         type: jsPsychHtmlKeyboardResponse,
@@ -297,7 +301,6 @@ const exp = (function() {
         data: {wheel_id: jsPsych.timelineVariable('wheel_id'), ev: jsPsych.timelineVariable('ev'), hE: jsPsych.timelineVariable('hE'), n_flip: jsPsych.timelineVariable('n_flip'), mi: jsPsych.timelineVariable('mi')},
         on_finish: function(data) {
             data.round = round;
-            shuffleColorsInPlace(wedges);
             flipArray = makeFlipArray(jsPsych.timelineVariable('n_flip'), 10);
         }
     };
@@ -467,7 +470,7 @@ const exp = (function() {
     p.save_data = {
         type: jsPsychPipe,
         action: "save",
-        experiment_id: "dy1nuOITjhzN",
+        experiment_id: "1pw0yDZI54h7",
         filename: filename,
         data_string: ()=>jsPsych.data.get().csv()
     };
