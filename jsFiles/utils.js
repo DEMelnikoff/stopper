@@ -553,6 +553,7 @@ function createActivatorWheel(canvas, spinnerData, score, sectors, reward, n_ali
     let aligned = aligned_array.pop();
     let outcome = (aligned == 1) ? expected_outcome : unexpected_outcome;
     score += outcome;
+    spinnerData.score = score;
     let fontWeight = (outcome == 0) ? 'normal' : 'bolder';
 
     spinnerData.prob.push(landed.prob);
