@@ -76,6 +76,10 @@ var jsPsychCanvasButtonResponse = (function (jspsych) {
       trial(display_element, trial) {
           // create canvas
           var html = 
+              '<div class="score-board">' +
+                '<div class="score-board-title">Total Tokens</div>' +
+                '<div class="score-board-score" id="score" >' + trial.score + '</div>' +
+              '</div>' +
               '<div id="jspsych-canvas-button-response-stimulus">' +
                 '<canvas id="jspsych-canvas-stimulus" height="' +
                 trial.canvas_size[0] +
@@ -95,10 +99,9 @@ var jsPsychCanvasButtonResponse = (function (jspsych) {
 
           // store data
           let spinnerData = {
-            landed_score: null,
-            landed_color: null,
-            award_score: null,
-            award_color: null,
+            prob: [],
+            outcome: [],
+            score: 0,
             rt: null,
           };
           trial.stimulus(c, spinnerData);
@@ -112,10 +115,9 @@ var jsPsychCanvasButtonResponse = (function (jspsych) {
               this.jsPsych.pluginAPI.clearAllTimeouts();
               // gather the data to store for the trial
               var trial_data = {
-                  landed_score: spinnerData.landed_score,
-                  landed_color: spinnerData.landed_color,
-                  award_score: spinnerData.award_score,
-                  award_color: spinnerData.award_color,
+                  prob: spinnerData.prob,
+                  outcome: spinnerData.outcome,
+                  score: spinnerData.score,
                   rt: spinnerData.rt,
               };
               // clear the display
@@ -145,9 +147,9 @@ var jsPsychCanvasButtonResponse = (function (jspsych) {
           }
           // end trial
           const waitForEnd = setInterval(function() {
-            if(spinnerData.award_score) {
+            if(spinnerData.outcome.length >= 15) {
               clearInterval(waitForEnd);
-              setTimeout(after_response, 1750);
+              setTimeout(after_response, 3000);
             }
           }, 100);
           // hide image if timing is set

@@ -423,19 +423,23 @@ const createSpinner = function(canvas, spinnerData, score, sectors, reliability,
  *   controller.start();
  */
 
-function createActivatorWheel(canvas, spinnerData, sectors, flip, play) {
+function createActivatorWheel(canvas, spinnerData, score, sectors, reward, n_aligned, play) {
 
   const cfg = {
     minStepMs: 50,
     maxStepMs: 85,
     labelColor: "#fff",
-    fontActive: "bolder 90px sans-serif",
-    fontIdle: "bold 65px sans-serif",
+    fontActive: "bolder 60px sans-serif",
+    fontIdle: "bold 45px sans-serif",
     scoreElemId: "score",
     pauseAfterFreeze: 2000,
     onComplete: null,
     autoStart: true,
+    maxRounds: 15,  // e.g., set to 15 to run 15 spins then complete
   };
+
+  let aligned_array = Array(n_aligned).fill(1).concat(Array(15 - n_aligned).fill(0));
+  aligned_array = jsPsych.randomization.repeat(aligned_array, 1);
 
   const ctx = canvas.getContext("2d");
   let rect = canvas.getBoundingClientRect();
@@ -444,6 +448,7 @@ function createActivatorWheel(canvas, spinnerData, sectors, flip, play) {
   let rad = Math.min(wheelWidth, wheelHeight) / 2;
   const tot = sectors.length;
   const arc = (2 * Math.PI) / tot;
+  const scoreMsg = document.getElementById("score");
 
   function resize() {
     rect = canvas.getBoundingClientRect();
@@ -476,7 +481,7 @@ function createActivatorWheel(canvas, spinnerData, sectors, flip, play) {
 
       // --- label coordinates ---
       const labelAngle = ang + arc / 2;  // midpoint of wedge
-      const labelRadius = rad * 0.65;    // how far out from center
+      const labelRadius = rad * 0.60;    // how far out from center
       const x = rad + Math.cos(labelAngle) * labelRadius;
       const y = rad + Math.sin(labelAngle) * labelRadius;
 
@@ -485,7 +490,7 @@ function createActivatorWheel(canvas, spinnerData, sectors, flip, play) {
 
       if (i === activeIndex) {
         // ACTIVE: big, bold, outlined
-        ctx.font = "900 96px sans-serif";
+        ctx.font = cfg.fontActive;
         ctx.lineWidth = 8;
         ctx.strokeStyle = "#000";
         ctx.fillStyle = "#fff";
@@ -496,7 +501,7 @@ function createActivatorWheel(canvas, spinnerData, sectors, flip, play) {
         ctx.shadowBlur = 0;
       } else {
         // INACTIVE
-        ctx.font = "700 65px sans-serif";
+        ctx.font = cfg.fontIdle;
         ctx.lineWidth = 3;
         ctx.strokeStyle = "#000";
         ctx.fillStyle = "#fff";
@@ -512,6 +517,7 @@ function createActivatorWheel(canvas, spinnerData, sectors, flip, play) {
   let running = false;
   let stepTimer = null;
   let frozen = false;
+  let roundsDone = 0;
 
   function nextIndex(prev) {
     let idx = Math.floor(Math.random() * tot);
@@ -540,37 +546,71 @@ function createActivatorWheel(canvas, spinnerData, sectors, flip, play) {
     frozen = true;
     stop();
 
-    // What the participant actually stopped on
-    const landed = sectors[activeIndex];
-    const landedPoints = landed.points;
-    const landedColor = landed.color;
+    let landed = sectors[activeIndex];
 
-    // With prob 'flip' (true), award = random other wedge; else landed
-    let award = landed;
-    if (flip) {
-      const others = sectors.filter((_, i) => i !== activeIndex);
-      award = others[Math.floor(Math.random() * others.length)];
-    }
+    let expected_outcome = landed.prob > .5 ? reward : 0;
+    let unexpected_outcome = landed.prob > .5 ? 0 : reward;
+    let aligned = aligned_array.pop();
+    let outcome = (aligned == 1) ? expected_outcome : unexpected_outcome;
+    score += outcome;
+    let fontWeight = (outcome == 0) ? 'normal' : 'bolder';
 
-    const awardPoints = award.points;
-    const awardColor = award.color;
+    spinnerData.prob.push(landed.prob);
+    spinnerData.outcome.push(outcome);
 
-    // Record both landed and awarded; use AWARD for outcomes/score
-    spinnerData.landed_score = landedPoints;
-    spinnerData.landed_color = landedColor;
-    spinnerData.award_score = awardPoints;
-    spinnerData.award_color = awardColor;
-
-    // Keep the active wedge visible (black) during the freeze
+    // Step 1: freeze in active highlight (your normal draw)
     draw(activeIndex);
 
+    // Step 2: after suspenseDelay, recolor wedge and show reward
+    const suspenseDelay = 1000; // ms delay before reveal
     setTimeout(() => {
-      if (typeof cfg.onComplete === "function") cfg.onComplete(spinnerData);
+      ctx.save();
+
+      const ang = arc * activeIndex;
+      ctx.beginPath();
+      ctx.moveTo(rad, rad);
+      ctx.arc(rad, rad, rad, ang, ang + arc);
+      ctx.closePath();
+      ctx.fillStyle = (outcome > 0) ? "green" : "black";
+      scoreMsg.innerHTML = `<span style="color:${ctx.fillStyle}; font-weight: ${fontWeight}">${score}</span>`;
+      ctx.fill();
+
+      // Label (reward amount or 0)
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.font = "900 85px sans-serif";
+      ctx.fillStyle = "#fff";
+      ctx.strokeStyle = "#000";
+      ctx.lineWidth = 5;
+      const labelAngle = ang + arc / 2;
+      const labelRadius = rad * 0.60;
+      const x = rad + Math.cos(labelAngle) * labelRadius;
+      const y = rad + Math.sin(labelAngle) * labelRadius;
+      ctx.strokeText(`+${outcome}`, x, y);
+      ctx.fillText(`+${outcome}`, x, y);
+      ctx.restore();
+
+    }, suspenseDelay);
+
+    // Step 3: pause, then either loop or call onComplete
+    setTimeout(() => {
+      // Count this round as completed first
+      roundsDone += 1;
+
+      const hasMore = (cfg.maxRounds == null) ? true : (roundsDone < cfg.maxRounds);
+
+      if (hasMore) {
+        frozen = false;
+        start();
+      } else {
+        if (typeof cfg.onComplete === "function") cfg.onComplete(spinnerData);
+      }
     }, cfg.pauseAfterFreeze);
   }
 
   function start() {
     if (running || frozen) return;
+    scoreMsg.innerHTML = `<span style="color:black; font-weight:normal">${score}</span>`;
     running = true;
     stepLoop();
     if (!play) {

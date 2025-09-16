@@ -44,50 +44,69 @@ const exp = (function() {
         how_to_earn: [
             `<div class='parent'>
                 <p>The more tokens you earn, the better your chances of winning a <strong>$100.00 bonus prize</strong>.</p>
-                <p>All of your tokens will be entered into a lottery. If one of your tokens is drawn, you’ll win $100.00. 
-                To maximize your chances, you’ll want to earn as many tokens as possible.</p>
+                <p>The tokens you earn will be entered into a lottery, and if one of your tokens is drawn, you'll win $100.00. 
+                To maximize your chances of winning $100.00, you'll need as many tokens as possible.</p>
             </div>`,
 
             `<div class='parent'>
                 <p>Each wheel is divided into four wedges.</p>
-                <p>The values on the wedges will rapidly activate at random, like this:</p>
+                <p>The probabilities on the wedges will rapidly activate at random, like this:</p>
                 <img src="./img/roulette-gif.gif" style="width:50%; height:50%">
             </div>`,
 
             `<div class='parent'>
-                <p>Eventually, the wheel will stop with one of the values activated.</p>
-                <p>At that point, you’ll see how many tokens you won.</p>
-                <img src="./img/roulette-stop.png" style="width:50%; height:50%">
+                <p>Eventually, the wheel will stop on one of the probabilities.</p>
+                <p>The activated probability determines your chance of winning a <em>jackpot</em>.</p>
+                <img src="./img/roulette-gif.gif" style="width:50%; height:50%">
             </div>`,
 
             `<div class='parent'>
-                <p>Usually, the number of tokens you win equals the activated number. For example, if the 4 is activated, you’ll usually win 4 tokens.</p>
-                <p>This is called a <strong>standard outcome</strong>.</p>
-                <img src="./img/standard-outcome.png" style="width:50%; height:50%">
+                <p>For example, if a wheel stops on <strong>25%</strong>, you'll have a 25% chance of winning a jackpot.</p>
+                <img src="./img/p25.png" style="width:50%; height:50%">
             </div>`,
 
             `<div class='parent'>
-                <p>Occasionally, the number of tokens you win equals one of the three <em>unactivated numbers</em>. For example, if the 4 is activated, you might instead win 2 tokens.</p>
-                <p>This is called a <strong>random outcome</strong>.</p>
-                <img src="./img/random-outcome.png" style="width:50%; height:50%">
+                <p>If a wheel stops on <strong>75%</strong>, you'll have a 75% chance of winning a jackpot.</p>
+                <img src="./img/p75.png" style="width:50%; height:50%">
             </div>`,
 
             `<div class='parent'>
-                <p>The chance of a standard outcome changes from wheel to wheel.</p>
+                <p>Jackpots are worth tokens.</p>
+                <p>The number of tokens a jackpot is worth can change from one wheel to the next.</p>
+                <img src="./img/p75.png" style="width:50%; height:50%">
             </div>`,
 
             `<div class='parent'>
-                <p>The chance of a standard outcome will be displayed before each wheel.</p>
-                <p>For example, this message means that the next wheel has a 75% chance of a standard outcome and a 25% chance of a random outcome.</p>
-                <img src="./img/outcome-75.png" style="width:70%; height:70%">      
+                <p>Before each wheel, you'll see how many tokens each jackpot is worth. For example, this message means that for the next wheel, each jackpot is worth <strong>7 tokens</strong>.</p>
+                <img src="./img/nextJackpot.png" style="width:70%; height:70%">      
+            </div>`,
+
+            `<div class='parent'>
+                <p>If you win a jackpot, the activated wedge will display the jackpot amount, and those tokens will be added to your total:</p>
+                <img src="./img/bonus.png" style="width:50%; height:50%">
+            </div>`,
+
+            `<div class='parent'>
+                <p>If you do not win a jackpot, the activated wedge will indicate that you earned <strong>0 tokens</strong>:</p>
+                <img src="./img/noBonus.png" style="width:50%; height:50%">
+            </div>`,
+
+            `<div class='parent'>
+                <p>Different wheels have different probabilites.</p>
+                <p>For instance, this wheel gives either a 60% or 40% chance of winning a jackpot.</p>
+                <img src="./img/p60.png" style="width:50%; height:50%">
+            </div>`,
+
+            `<div class='parent'>
+                <p>This wheel gives either a 100% or 0% chance of winning a jackpot.</p>
+                <img src="./img/p100.png" style="width:50%; height:50%">
             </div>`,
         ],
 
         how_to_spin_play: [
             `<div class='parent'>
-                <p>To stop a roulette wheel, press the <strong>spacebar</strong>.</p>
-                <p>As soon as you press it, the wheel will stop on the currently activated value.</p>
-                <img src="./img/roulette-stop.png" style="width:50%; height:50%">
+                <p>To stop a roulette wheel, press your <strong>spacebar</strong>.</p>
+                <p>As soon as you press it, the wheel will stop on the currently activated probability.</p>
             </div>`,
 
             `<div class='parent'>
@@ -105,8 +124,7 @@ const exp = (function() {
         how_to_spin_watch: [
             `<div class='parent'>
                 <p>The roulette wheel will stop automatically.</p>
-                <p>Simply watch as the wheel eventually stops on one of the values.</p>
-                <img src="./img/roulette-stop.png" style="width:50%; height:50%">
+                <p>Simply watch as the wheel eventually stops on one of the probabilities.</p>
             </div>`,
 
             `<div class='parent'>
@@ -143,7 +161,7 @@ const exp = (function() {
         allow_keys: false,
     };
 
-    let correctAnswers = [`100%`, `75%`, `50%`, `25%`, `Earn as many tokens as possible.`];
+    let correctAnswers = ['100%', '60%', '40%', '0%', `Earn as many tokens as possible.`];
 
     const errorMessage = {
         type: jsPsychInstructions,
@@ -159,24 +177,24 @@ const exp = (function() {
             </div>`,
         questions: [
             {
-                prompt: `If the wheel stops on a 9 and there's a 100% chance of a standard outcome, what are your chances of earning 9 tokens?`, 
+                prompt: `If you land on a 100% wedge, what are your chances of winning a jackpot?`, 
                 name: `attnChk1`, 
-                options: ['100%', '75%', '50%', '25%'],
+                options: ['100%', '60%', '40%', '0%'],
             },
             {
-                prompt: `If the wheel stops on a 9 and there's a 75% chance of a standard outcome, what are your chances of earning 9 tokens?`, 
+                prompt: `If you land on a 60% wedge, what are your chances of winning a jackpot?`, 
                 name: `attnChk2`, 
-                options: ['100%', '75%', '50%', '25%'],
+                options: ['100%', '60%', '40%', '0%'],
             },
             {
-                prompt: `If the wheel stops on a 9 and there's a 50% chance of a standard outcome, what are your chances of earning 9 tokens?`, 
+                prompt: `If you land on a 40% wedge, what are your chances of winning a jackpot?`, 
                 name: `attnCh3`, 
-                options: ['100%', '75%', '50%', '25%'],
+                options: ['100%', '60%', '40%', '0%'],
             },
             {
-                prompt: `If the wheel stops on a 9 and there's a 25% chance of a standard outcome, what are your chances of earning 9 tokens?`, 
+                prompt: `If you land on a 0% wedge, what are your chances of winning a jackpot?`, 
                 name: `attnCh4`, 
-                options: ['100%', '75%', '50%', '25%'],
+                options: ['100%', '60%', '40%', '0%'],
             },
             {
                 prompt: `What is your goal?`, 
@@ -222,132 +240,59 @@ const exp = (function() {
     *
     */
 
-    function makeFlipArray(n, nTotal) {
-        const arr = Array(n).fill(true).concat(Array(nTotal - n).fill(false));
-        return jsPsych.randomization.repeat(arr, 1)
-    };
-
     // define each wedge
     const wedges = {
-        two: {color: "#E69F00", font: 'white', label:"2", points: 2},
-        three: {color: "#56B4E9", font: 'white', label:"3", points: 3},
-        four: {color: "#009E73", font: 'white', label:"4", points: 4},
-        five: {color: "#F0E442", font: 'white', label:"5", points: 5},
-        six: {color: "#0072B2", font: 'white', label:"6", points: 6},
-        seven: {color: "#D55E00", font: 'white', label:"7", points: 7},
-        eight: {color: "#CC79A7", font: 'white', label:"8", points: 8},
-        nine: {color: "#999999", font: 'white', label:"9", points: 9},
+        p60:  {color: "#BDBDBD", font: 'white', label:"60%",  prob: .6},
+        p40:  {color: "#737373", font: 'white', label:"40%",  prob: .4},
+        p100: {color: "#BDBDBD", font: 'white', label:"100%", prob: 1},
+        p0:   {color: "#737373", font: 'white', label:"0%",   prob: 0},
     };
-
-    function shuffleColorsInPlace(wedgesObj) {
-        const shuffledColors = jsPsych.randomization.repeat(Object.values(wedgesObj).map(w => w.color), 1);
-        Object.keys(wedgesObj).forEach((key, i) => { wedgesObj[key].color = shuffledColors[i] });
-    };
-
 
     // define each wheel
     const wheels = [
-        {sectors: [ 'two', 'three', 'four', 'five' ],    wheel_id: 1,  n_flip: 0, label: "100%", ev: 3.5, hE: 2, mi: 2},
-        {sectors: [ 'four', 'five', 'six', 'seven' ],    wheel_id: 2,  n_flip: 0, label: "100%", ev: 5.5, hE: 2, mi: 2},
-        {sectors: [ 'six', 'seven', 'eight', 'nine' ],   wheel_id: 3,  n_flip: 0, label: "100%", ev: 7.5, hE: 2, mi: 2},
-        //{sectors: [ wedges.three, wedges.three, wedges.three, wedges.five ], wheel_id: 4,  n_flip: 0, label: "100%", ev: 3.5, hE: 0.8112781, mi: 0.8112781},
-        //{sectors: [ wedges.five, wedges.five, wedges.five, wedges.seven ],   wheel_id: 5,  n_flip: 0, label: "100%", ev: 5.5, hE: 0.8112781, mi: 0.8112781},
-        //{sectors: [ wedges.seven, wedges.seven, wedges.seven, wedges.nine ], wheel_id: 6,  n_flip: 0, label: "100%", ev: 7.5, hE: 0.8112781, mi: 0.8112781},
-
-        {sectors: [ 'two', 'three', 'four', 'five' ],    wheel_id: 4,  n_flip: 2, label: "80%", ev: 3.5, hE: 2, mi: 0.9610794},
-        {sectors: [ 'four', 'five', 'six', 'seven' ],    wheel_id: 5,  n_flip: 2, label: "80%", ev: 5.5, hE: 2, mi: 0.9610794},
-        {sectors: [ 'six', 'seven', 'eight', 'nine' ],   wheel_id: 6,  n_flip: 2, label: "80%", ev: 7.5, hE: 2, mi: 0.9610794},
-        //{sectors: [ wedges.three, wedges.three, wedges.three, wedges.five ], wheel_id: 10, n_flip: 2, label: "80%", ev: 3.5, hE: 0.8112781, mi: 0.3657766},
-        //{sectors: [ wedges.five, wedges.five, wedges.five, wedges.seven ],   wheel_id: 11, n_flip: 2, label: "80%", ev: 5.5, hE: 0.8112781, mi: 0.3657766},
-        //{sectors: [ wedges.seven, wedges.seven, wedges.seven, wedges.nine ], wheel_id: 12, n_flip: 2, label: "80%", ev: 7.5, hE: 0.8112781, mi: 0.3657766},
-
-        {sectors: [ 'two', 'three', 'four', 'five' ],    wheel_id: 7, n_flip: 4, label: "60%", ev: 3.5, hE: 2, mi: 0.3950644},
-        {sectors: [ 'four', 'five', 'six', 'seven' ],    wheel_id: 8, n_flip: 4, label: "60%", ev: 5.5, hE: 2, mi: 0.3950644},
-        {sectors: [ 'six', 'seven', 'eight', 'nine' ],   wheel_id: 9, n_flip: 4, label: "60%", ev: 7.5, hE: 2, mi: 0.3950644},
-        //{sectors: [ wedges.three, wedges.three, wedges.three, wedges.five ], wheel_id: 16, n_flip: 4, label: "60%", ev: 3.5, hE: 0.8112781, mi: 0.1436583},
-        //{sectors: [ wedges.five, wedges.five, wedges.five, wedges.seven ],   wheel_id: 17, n_flip: 4, label: "60%", ev: 5.5, hE: 0.8112781, mi: 0.1436583},
-        //{sectors: [ wedges.seven, wedges.seven, wedges.seven, wedges.nine ], wheel_id: 18, n_flip: 4, label: "60%", ev: 7.5, hE: 0.8112781, mi: 0.1436583},
-
-        {sectors: [ 'two', 'three', 'four', 'five' ],    wheel_id: 10, n_flip: 6, label: "40%", ev: 3.5, hE: 2, mi: 0.07807191},
-        {sectors: [ 'four', 'five', 'six', 'seven' ],    wheel_id: 11, n_flip: 6, label: "40%", ev: 5.5, hE: 2, mi: 0.07807191},
-        {sectors: [ 'six', 'seven', 'eight', 'nine' ],   wheel_id: 12, n_flip: 6, label: "40%", ev: 7.5, hE: 2, mi: 0.07807191},
+        {sectors: [ wedges.p60, wedges.p40, wedges.p60, wedges.p40 ], wheel_id: 1, reward: 5,  ev: 2.5, mi: 0, n_aligned: 9},
+        {sectors: [ wedges.p100, wedges.p0, wedges.p100, wedges.p0 ], wheel_id: 2, reward: 5,  ev: 2.5, mi: 1, n_aligned: 15},
+        {sectors: [ wedges.p60, wedges.p40, wedges.p60, wedges.p40 ], wheel_id: 3, reward: 10, ev: 5.0, mi: 0, n_aligned: 9},
+        {sectors: [ wedges.p100, wedges.p0, wedges.p100, wedges.p0 ], wheel_id: 4, reward: 10, ev: 5.0, mi: 1, n_aligned: 15},
     ];
 
-    /*
-    wheels.forEach(wheel => {
-        wheel.sectors = jsPsych.randomization.repeat(wheel.sectors.slice(), 1);
-    });
-    */
+    let scoreTracker = 0; // track current score
 
     let round = 1;  // track current round
 
     let flipArray;
 
-    shuffleColorsInPlace(wedges);
-
     const preSpin = {
         type: jsPsychHtmlKeyboardResponse,
         stimulus: function() {
-            let pct = jsPsych.timelineVariable('label');
-            let html = `<div class='pFlip-style'>
-                            <p><span style='font-size:100px'><strong>${pct}</strong></span>
-                            <br><br><br>chance of standard outcome</p>
+            let reward = jsPsych.timelineVariable('reward');
+            let html = `<div class="pFlip">
+                          <p class="pFlip__label">For the next wheel, jackpots are worth:</p>
+                          <span class="pFlip__value">${reward}</span>
                         </div>`;
             return html;
         },
         choices: "NO_KEYS",
         trial_duration: 5000,
         response_ends_trial: false,
-        data: {wheel_id: jsPsych.timelineVariable('wheel_id'), ev: jsPsych.timelineVariable('ev'), hE: jsPsych.timelineVariable('hE'), n_flip: jsPsych.timelineVariable('n_flip'), mi: jsPsych.timelineVariable('mi')},
+        data: {wheel_id: jsPsych.timelineVariable('wheel_id'), reward: jsPsych.timelineVariable('reward'), mi: jsPsych.timelineVariable('mi')},
         on_finish: function(data) {
             data.round = round;
-            flipArray = makeFlipArray(jsPsych.timelineVariable('n_flip'), 10);
         }
     };
 
     const spin = {
         type: jsPsychCanvasButtonResponse,
         stimulus: function(c, spinnerData) {
-            let flip = flipArray.pop()
-            const keys = jsPsych.timelineVariable('sectors');
-            const sectorsLive = keys.map(k => wedges[k]);
-            createActivatorWheel(c, spinnerData, sectorsLive, flip, playBool);
+            createActivatorWheel(c, spinnerData, scoreTracker, jsPsych.timelineVariable('sectors'), jsPsych.timelineVariable('reward'), jsPsych.timelineVariable('n_aligned'), playBool);
         },
         canvas_size: [500, 500],
         score: null,
-        data: {wheel_id: jsPsych.timelineVariable('wheel_id'), ev: jsPsych.timelineVariable('ev'), hE: jsPsych.timelineVariable('hE'), n_flip: jsPsych.timelineVariable('n_flip'), mi: jsPsych.timelineVariable('mi')},
+        data: {wheel_id: jsPsych.timelineVariable('wheel_id'), reward: jsPsych.timelineVariable('reward'), mi: jsPsych.timelineVariable('mi')},
         on_finish: function(data) {
             data.round = round;
+            scoreTracker = data.score
         }
-    };
-
-    const feedback = {
-        type: jsPsychHtmlKeyboardResponse,
-        stimulus: () => {
-            const last = jsPsych.data.get().last(1).values()[0]; // spin trial
-            const pts = last.award_score;     // <-- awarded (reliability-adjusted)
-            const col = last.award_color;      // <-- matching color
-            return `
-                <div class="center">
-                    <div style="color:${col}; line-height:1.2">
-                        <div style="font-size:150px; font-weight:800;">+${pts}</div>
-                        <div style="font-size:80px; font-weight:600;">Tokens</div>
-                    </div>
-                </div>
-            `;
-        },
-        choices: "NO_KEYS",
-        trial_duration: 1750,
-        data: {wheel_id: jsPsych.timelineVariable('wheel_id'), ev: jsPsych.timelineVariable('ev'), hE: jsPsych.timelineVariable('hE'), n_flip: jsPsych.timelineVariable('n_flip'), mi: jsPsych.timelineVariable('mi')},
-        on_finish: function(data) {
-            data.round = round;
-        }
-    };
-
-    // Choice loop
-    const spinLoop = {
-        timeline: [spin, feedback],
-        repetitions: 10,
     };
 
     // trial: flow DV
@@ -360,7 +305,7 @@ const exp = (function() {
         ],
         randomize_question_order: false,
         scale_width: 600,
-        data: {wheel_id: jsPsych.timelineVariable('wheel_id'), ev: jsPsych.timelineVariable('ev'), hE: jsPsych.timelineVariable('hE'), n_flip: jsPsych.timelineVariable('n_flip'), mi: jsPsych.timelineVariable('mi')},
+        data: {wheel_id: jsPsych.timelineVariable('wheel_id'), reward: jsPsych.timelineVariable('reward'), mi: jsPsych.timelineVariable('mi')},
         on_finish: function(data) {
             data.round = round;
             saveSurveyData(data);
@@ -377,7 +322,7 @@ const exp = (function() {
             },
         ],
         scale_width: 500,
-        data: {wheel_id: jsPsych.timelineVariable('wheel_id'), ev: jsPsych.timelineVariable('ev'), hE: jsPsych.timelineVariable('hE'), n_flip: jsPsych.timelineVariable('n_flip'), mi: jsPsych.timelineVariable('mi')},
+        data: {wheel_id: jsPsych.timelineVariable('wheel_id'), reward: jsPsych.timelineVariable('reward'), mi: jsPsych.timelineVariable('mi')},
         on_finish: (data) => {
             data.round = round;
             saveSurveyData(data);
@@ -387,8 +332,7 @@ const exp = (function() {
 
     // timeline: main task
     p.task = {
-        timeline: [preSpin, spinLoop, flowMeasure, happinessMeasure],
-        repetitions: 1,
+        timeline: [preSpin, spin, flowMeasure, happinessMeasure],
         timeline_variables: wheels,
         randomize_order: true,
     };
@@ -470,7 +414,7 @@ const exp = (function() {
     p.save_data = {
         type: jsPsychPipe,
         action: "save",
-        experiment_id: "1pw0yDZI54h7",
+        experiment_id: "QPCT7FtbWkfF",
         filename: filename,
         data_string: ()=>jsPsych.data.get().csv()
     };
