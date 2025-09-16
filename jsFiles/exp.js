@@ -261,10 +261,10 @@ const exp = (function() {
 
     // define each wheel
     const wheels = [
-        {sectors: [ wedges.p60, wedges.p40, wedges.p60, wedges.p40 ], wheel_id: 1, reward: 5,  ev: 2.5, mi: 0, n_aligned: 9},
-        {sectors: [ wedges.p100, wedges.p0, wedges.p100, wedges.p0 ], wheel_id: 2, reward: 5,  ev: 2.5, mi: 1, n_aligned: 15},
-        {sectors: [ wedges.p60, wedges.p40, wedges.p60, wedges.p40 ], wheel_id: 3, reward: 10, ev: 5.0, mi: 0, n_aligned: 9},
-        {sectors: [ wedges.p100, wedges.p0, wedges.p100, wedges.p0 ], wheel_id: 4, reward: 10, ev: 5.0, mi: 1, n_aligned: 15},
+        {sectors: [ wedges.p60, wedges.p40, wedges.p60, wedges.p40 ], wheel_id: 1, reward: 5,  ev: 2.5, mv: 1, mi: 0, n_aligned: 9},
+        {sectors: [ wedges.p100, wedges.p0, wedges.p100, wedges.p0 ], wheel_id: 2, reward: 5,  ev: 2.5, mv: 5, mi: 1, n_aligned: 15},
+        {sectors: [ wedges.p60, wedges.p40, wedges.p60, wedges.p40 ], wheel_id: 3, reward: 10, ev: 5.0, mv: 2, mi: 0, n_aligned: 9},
+        {sectors: [ wedges.p100, wedges.p0, wedges.p100, wedges.p0 ], wheel_id: 4, reward: 10, ev: 5.0, mv: 10, mi: 1, n_aligned: 15},
     ];
 
     let scoreTracker = 0; // track current score
@@ -286,7 +286,7 @@ const exp = (function() {
         choices: "NO_KEYS",
         trial_duration: 5000,
         response_ends_trial: false,
-        data: {wheel_id: jsPsych.timelineVariable('wheel_id'), reward: jsPsych.timelineVariable('reward'), mi: jsPsych.timelineVariable('mi')},
+        data: {wheel_id: jsPsych.timelineVariable('wheel_id'), reward: jsPsych.timelineVariable('reward'), ev: jsPsych.timelineVariable('ev'), mv: jsPsych.timelineVariable('mv'), mi: jsPsych.timelineVariable('mi')},
         on_finish: function(data) {
             data.round = round;
         }
@@ -299,7 +299,7 @@ const exp = (function() {
         },
         canvas_size: [500, 500],
         score: null,
-        data: {wheel_id: jsPsych.timelineVariable('wheel_id'), reward: jsPsych.timelineVariable('reward'), mi: jsPsych.timelineVariable('mi')},
+        data: {wheel_id: jsPsych.timelineVariable('wheel_id'), reward: jsPsych.timelineVariable('reward'), ev: jsPsych.timelineVariable('ev'), mv: jsPsych.timelineVariable('mv'), mi: jsPsych.timelineVariable('mi')},
         on_finish: function(data) {
             data.round = round;
             scoreTracker = data.score
@@ -316,7 +316,7 @@ const exp = (function() {
         ],
         randomize_question_order: false,
         scale_width: 600,
-        data: {wheel_id: jsPsych.timelineVariable('wheel_id'), reward: jsPsych.timelineVariable('reward'), mi: jsPsych.timelineVariable('mi')},
+        data: {wheel_id: jsPsych.timelineVariable('wheel_id'), reward: jsPsych.timelineVariable('reward'), ev: jsPsych.timelineVariable('ev'), mv: jsPsych.timelineVariable('mv'), mi: jsPsych.timelineVariable('mi')},
         on_finish: function(data) {
             data.round = round;
             saveSurveyData(data);
@@ -333,7 +333,7 @@ const exp = (function() {
             },
         ],
         scale_width: 500,
-        data: {wheel_id: jsPsych.timelineVariable('wheel_id'), reward: jsPsych.timelineVariable('reward'), mi: jsPsych.timelineVariable('mi')},
+        data: {wheel_id: jsPsych.timelineVariable('wheel_id'), reward: jsPsych.timelineVariable('reward'), ev: jsPsych.timelineVariable('ev'), mv: jsPsych.timelineVariable('mv'), mi: jsPsych.timelineVariable('mi')},
         on_finish: (data) => {
             data.round = round;
             saveSurveyData(data);
